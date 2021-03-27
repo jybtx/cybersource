@@ -1,0 +1,34 @@
+{
+    "name": "jybtx/cybersource",
+    "description": "CyberSource PHP SOAP client",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "jybtx",
+            "email": "2574034626@qq.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=7.1",
+        "ext-curl": "*",
+        "ext-openssl": "*",
+        "ext-soap": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Jybtx\\Cybersource\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Jybtx\\Cybersource\\CybersourceServiceProvider"
+            ],
+            "aliases": {
+                "CyberSource": "Jybtx\\Cybersource\\CyberSourceFacade"
+            }
+        }
+    }
+}
