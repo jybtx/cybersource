@@ -1,13 +1,34 @@
 <?php
 
 return [
-
+    /**
+     * -------------------------------
+     *          *** 账号id ***
+     * -------------------------------
+     */
     "merchant_id" => env('MERCHANT_ID',''),
 
+    /**
+     * -------------------------------
+     *    *** transaction key ***
+     * -------------------------------
+     */
     "transaction_key" => env('TRANSACTION_KEY',''),
 
+    /**
+     * -------------------------------
+     *       *** 账户识别码 ***
+     * -------------------------------
+     */
     "reference_code" => env('REFERENCE_CODE',''),
 
+    /**
+     * -------------------------------
+     *       *** 是否测试环境 ***
+     * -------------------------------
+     * false：测试环境
+     * true：正式环境
+     */
     "test_environment" => env('TEST_ENVIRONMENT','false'),
 
     //Modify the URL to point to either a live or test WSDL file with the desired API version.
