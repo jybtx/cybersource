@@ -18,10 +18,11 @@ class CybsClient extends SoapClient
     private $merchantId;
     private $transactionKey;
     private $referenceCode;
+    private $nameSpace;
 
-    function __construct($options=array(), $properties, $nvp=false)
+    function __construct($options=array(), $properties, $nvp = false)
     {
-        $required = array('merchant_id', 'transaction_key','reference_code');
+        $required = array('merchant_id', 'transaction_key', 'reference_code', 'name_space');
 
         if (!$properties) {
             throw new \Exception('Unable to read cybs.ini.');
@@ -45,25 +46,26 @@ class CybsClient extends SoapClient
         $this->merchantId     = $properties['merchant_id'];
         $this->transactionKey = $properties['transaction_key'];
         $this->referenceCode  = $properties['reference_code'];
+        $this->nameSpace      = $properties['name_space'];
 
-        $nameSpace = "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd";
+
 
         $soapUsername = new \SoapVar(
             $this->merchantId,
             XSD_STRING,
             NULL,
-            $nameSpace,
+            $this->nameSpace,
             NULL,
-            $nameSpace
+            $this->nameSpace
         );
 
         $soapPassword = new \SoapVar(
             $this->transactionKey,
             XSD_STRING,
             NULL,
-            $nameSpace,
+            $this->nameSpace,
             NULL,
-            $nameSpace
+            $this->nameSpace
         );
 
         $auth = new \stdClass();
@@ -73,9 +75,9 @@ class CybsClient extends SoapClient
         $soapAuth = new \SoapVar(
             $auth,
             SOAP_ENC_OBJECT,
-            NULL, $nameSpace,
+            NULL, $this->nameSpace,
             'UsernameToken',
-            $nameSpace
+            $this->nameSpace
         );
 
         $token = new \stdClass();
@@ -85,21 +87,21 @@ class CybsClient extends SoapClient
             $token,
             SOAP_ENC_OBJECT,
             NULL,
-            $nameSpace,
+            $this->nameSpace,
             'UsernameToken',
-            $nameSpace
+            $this->nameSpace
         );
 
         $security =new \SoapVar(
             $soapToken,
             SOAP_ENC_OBJECT,
             NULL,
-            $nameSpace,
+            $this->nameSpace,
             'Security',
-            $nameSpace
+            $this->nameSpace
         );
 
-        $header = new \SoapHeader($nameSpace, 'Security', $security, true);
+        $header = new \SoapHeader($this->nameSpace, 'Security', $security, true);
 
         $this->__setSoapHeaders(array($header));
     }

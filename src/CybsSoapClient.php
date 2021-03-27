@@ -8,7 +8,7 @@ class CybsSoapClient extends CybsClient
     function __construct($options=array())
     {
         $properties = config('cybersource');
-        parent::__construct($options, $properties);
+        parent::__construct($options, $properties,$properties['test_environment']);
     }
 
     /**
