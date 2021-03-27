@@ -11,7 +11,48 @@ $ composer require jybtx/cybersource -vvv
 
 ## Usage
 
-TODO
+```php
+
+use CyberSource;
+
+$request = CyberSource::createRequest();
+// 银行卡信息
+$card = new stdClass();
+$card->accountNumber = '4622 9431 2701 3705';
+$card->expirationMonth = '12';
+$card->expirationYear = '22';
+$request->card = $card;
+
+$ccAuthService = new stdClass();
+$ccAuthService->run = 'true';
+$request->ccAuthService = $ccAuthService;
+
+$ccCaptureService = new stdClass();
+$ccCaptureService->run = 'true';
+$request->ccCaptureService = $ccCaptureService;
+
+// 个人信息
+$billTo = new stdClass();
+$billTo->firstName = 'first name';
+$billTo->lastName = 'last name';
+$billTo->street1 = '1295 Charleston Road';
+$billTo->city = 'Mountain View';
+$billTo->state = 'CA';
+//        $billTo->postalCode = '838';
+$billTo->country = 'CN';
+$billTo->email = 'xx@xx.com';
+$billTo->ipAddress = request()->ip();
+$request->billTo = $billTo;
+//
+$purchaseTotals = new stdClass();
+$purchaseTotals->currency = 'USD';
+$purchaseTotals->grandTotalAmount = '0.1';
+$request->purchaseTotals = $purchaseTotals;
+
+$reply = CyberSource::runTransaction($request);
+dd($reply);
+
+```
 
 ## Contributing
 
